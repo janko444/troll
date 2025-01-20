@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+#troll-container {
+  text-align: center;
+}
+#troll {
+  cursor: pointer;
+  max-width: 300px;
+  transition: transform 0.3s;
+}
+#troll:hover {
+  transform: scale(1.1);
+}
