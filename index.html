@@ -1,16 +1,55 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nie Karm Trolla</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nie Karm Trola</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-top: 50px;
+        }
+
+        video {
+            display: none; /* Ukryty film, pokaże się po kliknięciu */
+        }
+    </style>
 </head>
 <body>
-  <div id="troll-container">
-    <img id="troll" src="troll.png" alt="Nie karm Trolla">
-  </div>
-  <audio id="goofy-music" src="goofy.mp3"></audio>
-  <script src="script.js"></script>
+    <h1>Kliknij, aby nakarmić Trola 🌀</h1>
+    <button id="actionButton">Kliknij mnie!</button>
+    <video id="goofyVideo" src="goofyfilm.mp4" autoplay controls></video>
+
+    <script>
+        const actionButton = document.getElementById('actionButton');
+        const goofyVideo = document.getElementById('goofyVideo');
+
+        // Funkcja po kliknięciu
+        actionButton.addEventListener('click', () => {
+            // 1. Odtwórz film
+            goofyVideo.style.display = 'block';
+            goofyVideo.play();
+
+            // 2. Otwórz kilka nowych okien
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    window.open('https://niekarmtrola.pl', '_blank', `width=400,height=400,top=${Math.random() * screen.height},left=${Math.random() * screen.width}`);
+                }, i * 500); // Opóźnienie między oknami
+            }
+
+            // 3. Pobierz obrazek
+            const link = document.createElement('a');
+            link.href = 'troll.jpg'; // Ścieżka do obrazka
+            link.download = 'troll.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
 </body>
 </html>
