@@ -6,49 +6,69 @@
     <title>Nie Karm Trola</title>
     <style>
         body {
+            background-color: black;
             text-align: center;
+            color: white;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
         }
 
         h1 {
             margin-top: 50px;
+            font-size: 2em;
         }
 
-        video {
-            display: none; /* Ukryty film, pokaże się po kliknięciu */
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: darkred;
         }
     </style>
 </head>
 <body>
-    <h1>Kliknij, aby nakarmić Trola 🌀</h1>
-    <button id="actionButton">Kliknij mnie!</button>
-    <video id="goofyVideo" src="goofyfilm.mp4" autoplay controls></video>
+    <h1>Nie Karm Trola! 🌀</h1>
+    <button id="startButton">Kliknij, aby nakarmić Trola!</button>
+    <audio id="trollSound" src="goofyfilm.mp3"></audio>
 
     <script>
-        const actionButton = document.getElementById('actionButton');
-        const goofyVideo = document.getElementById('goofyVideo');
+        const startButton = document.getElementById('startButton');
+        const trollSound = document.getElementById('trollSound');
 
-        // Funkcja po kliknięciu
-        actionButton.addEventListener('click', () => {
-            // 1. Odtwórz film
-            goofyVideo.style.display = 'block';
-            goofyVideo.play();
-
-            // 2. Otwórz kilka nowych okien
-            for (let i = 0; i < 5; i++) {
+        // Funkcja latających okien
+        function createFlyingWindows() {
+            for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
-                    window.open('https://niekarmtrola.pl', '_blank', `width=400,height=400,top=${Math.random() * screen.height},left=${Math.random() * screen.width}`);
-                }, i * 500); // Opóźnienie między oknami
+                    const newWindow = window.open(
+                        '',
+                        '_blank',
+                        `width=300,height=300,top=${Math.random() * screen.height},left=${Math.random() * screen.width}`
+                    );
+                    if (newWindow) {
+                        newWindow.document.write(`
+                            <body style="margin: 0; background: black; display: flex; justify-content: center; align-items: center; height: 100%;">
+                                <img src="troll.jpg" alt="Troll" style="width: 100%; height: auto;">
+                            </body>
+                        `);
+                    }
+                }, i * 500); // Opóźnienie w otwieraniu kolejnych okien
             }
+        }
 
-            // 3. Pobierz obrazek
-            const link = document.createElement('a');
-            link.href = 'troll.jpg'; // Ścieżka do obrazka
-            link.download = 'troll.jpg';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        // Funkcja obsługi przycisku
+        startButton.addEventListener('click', () => {
+            // Odtwórz dźwięk
+            trollSound.play();
+
+            // Uruchom latające okna
+            createFlyingWindows();
         });
     </script>
 </body>
